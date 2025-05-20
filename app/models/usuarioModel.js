@@ -4,8 +4,7 @@ const usuarioModel = {
     findAll: async () => {
         try {
             const [resultados] = await pool.query(
-                `SELECT * FROM usuario u
-                 JOIN tipo_usuario t ON t.id_tipo_usuario = u.tipo_usuario
+                `SELECT * FROM USUARIO u
                  WHERE u.status_usuario = 1`
             );
             return resultados;

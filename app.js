@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-//const env = require("dotenv").config();
+const env = require("dotenv").config();
 const session = require("express-session");
 
 // Sessão
