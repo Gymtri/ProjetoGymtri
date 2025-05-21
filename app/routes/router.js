@@ -23,4 +23,20 @@ router.get("/usuario", usuarioController.listaUsuarios);
 
 router.post('/aluno', usuarioController);
 
+// Listar usuários
+router.get("/", usuarioController.listaUsuarios);
+
+// Exibir formulário de edição de perfil
+router.get("/perfil", usuarioController.mostrarPerfil);
+
+// Atualizar dados do perfil
+router.post("/perfil", usuarioController.gravarPerfil);
+
+// Criar novo usuário (opcional)
+router.post("/criar", usuarioController.criarUsuario); // adicionar no controller
+
+router.get("/usuario", usuarioController.listaUsuarios);
+
+router.post('/aluno', usuarioController);
+
 module.exports = router;
