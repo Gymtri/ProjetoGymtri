@@ -4,7 +4,7 @@ const usuarioModel = require("../models/usuarioModel");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const salt = bcrypt.genSaltSync(12);
-const { removeImg } = require("../public/img");
+//const { removeImg } = require("../public/img");
 const fetch = (...args) => import("node-fetch").then(({ default: fetch }) => fetch(...args));
 const https = require("https");
 
