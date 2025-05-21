@@ -21,6 +21,6 @@ router.get('/produtos', (req, res)=>{
 
 router.get("/usuario", usuarioController.listaUsuarios);
 
-router.post('/aluno', usuarioController. )
+router.post('/aluno', usuarioController);
 
 module.exports = router;
