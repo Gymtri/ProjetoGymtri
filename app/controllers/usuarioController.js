@@ -4,7 +4,8 @@ const bcrypt = require('bcryptjs')
 var salt = bcrypt.genSaltSync(12)
 const{removeImg} = require('../public/img')
 const fetch = (..args) => import('node-fetch').then(({default: fetch}) => fetch(..args))
-const https = require('https')
+const https = require('https');
+const { header } = require("express-validator");
 
 
 const usuarioController = {
@@ -44,9 +45,14 @@ const usuarioController = {
                 const httpsAgent = https.Agent({
                     rejectUnauthorized: false
                 });
-                const response = await fetch(`https://`)
+                const response = await fetch(`https://viacep.com.br/ws/${results[0].cep_usuario}/json/`,
+                    {method: 'GET', headers: null, body: null, agent: httpsAgent,})
+                var viaCep = await response.json()
+                var cep = results[0].cep_usuario.slice(0,5)+ '-' +results[0].cep_usuario.slice(5)
+            }else{
+                var cep
             }
-        }
+        },
     }
 };
 
