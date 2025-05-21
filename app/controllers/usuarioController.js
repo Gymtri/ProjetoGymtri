@@ -9,6 +9,38 @@ const fetch = (...args) => import("node-fetch").then(({ default: fetch }) => fet
 const https = require("https");
 
 const usuarioController = {
+  cadastrarAluno: async (req, res) => {
+    try {
+      const { nome_usuario, email_usuario, senha_usuario, telefone_usuario } = req.body;
+
+      // Validação simples
+      if (!nome_usuario || !email_usuario || !senha_usuario || !telefone_usuario) {
+        return res.status(400).send("Todos os campos são obrigatórios.");
+      }
+
+      // Criptografar a senha
+      const senhaCriptografada = bcrypt.hashSync(senha_usuario, salt);
+
+      // Montar objeto de dados
+      const novoUsuario = {
+        nome_usuario,
+        email_usuario,
+        senha_usuario: senhaCriptografada,
+        telefone_usuario,
+        tipo: "aluno", // Ou outro valor conforme seu banco
+      };
+
+      // Salvar no banco
+      await usuarioModel.create(novoUsuario);
+
+      res.status(201).send("Aluno cadastrado com sucesso!");
+    } catch (erro) {
+      console.error("Erro ao cadastrar aluno:", erro);
+      res.status(500).send("Erro no servidor ao cadastrar aluno.");
+    }
+  },
+
+
   // Listar todos os usuários
   listaUsuarios: async (req, res) => {
     try {

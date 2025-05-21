@@ -2,41 +2,46 @@ const express = require("express");
 const router = express.Router();
 const usuarioController = require("../controllers/usuarioController");
 
+// Página inicial
+router.get('/', (req, res) => {
+    res.render('pages/index');
+});
 
-router.get('/', (req, res)=>{
-    res.render('pages/index')
-})
+// Página de login
+router.get('/login', (req, res) => {
+    res.render('pages/login', { falha: null, listaErros: null });
+});
 
-router.get('/login', (req, res)=>{
-    res.render('pages/login',{falha:null, listaErros:null})
-})
+// Página de cadastro
+router.get('/cadastro', (req, res) => {
+    res.render('pages/cadastro', {
+        valores: {
+            cep: '',
+            logradouro: '',
+            numero: '',
+            complemento: ''
+        }
+    });
+});
 
-router.get('/cadastro', (req, res)=>{
-    res.render('pages/cadastro', {valores:{cep:'', logradouro:'', numero:'', complemento:''}})
-})
-
-router.get('/produtos', (req, res)=>{
-    res.render('pages/produtos')
-})
-
-router.get("/usuario", usuarioController.listaUsuarios);
-
-router.post('/aluno', usuarioController);
+// Página de produtos
+router.get('/produtos', (req, res) => {
+    res.render('pages/produtos');
+});
 
 // Listar usuários
-router.get("/", usuarioController.listaUsuarios);
+router.get("/usuario", usuarioController.listaUsuarios); // Função de listagem
 
-// Exibir formulário de edição de perfil
-router.get("/perfil", usuarioController.mostrarPerfil);
+// Exibir perfil do usuário
+router.get("/perfil", usuarioController.mostrarPerfil); // Função para mostrar perfil
 
-// Atualizar dados do perfil
-router.post("/perfil", usuarioController.gravarPerfil);
+// Gravar alterações do perfil
+router.post("/perfil", usuarioController.gravarPerfil); // Função para gravar perfil
 
-// Criar novo usuário (opcional)
-router.post("/criar", usuarioController.criarUsuario); // adicionar no controller
+// Criar novo usuário
+router.post("/criar", usuarioController.criarUsuario); // Supondo que você tenha a função de criar usuário no controller
 
-router.get("/usuario", usuarioController.listaUsuarios);
-
-router.post('/aluno', usuarioController);
+// Cadastro de aluno (verifique se a função existe em usuarioController)
+router.post('/aluno', usuarioController.cadastrarAluno); // Função para cadastro de aluno
 
 module.exports = router;
