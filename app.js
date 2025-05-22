@@ -1,7 +1,8 @@
-const express = require("express");
-const app = express();
-const env = require("dotenv").config();
-const session = require("express-session");
+const express = require("express")
+const app = express()
+const env = require("dotenv").config()
+const session = require("express-session")
+const path = require('path')
 
 // Sessão
 app.use(session({
@@ -26,9 +27,17 @@ app.use(express.urlencoded({ extended: true }));
 const rotaPrincipal = require("./app/routes/router"); // <- Certifique-se que o caminho está certo
 app.use("/", rotaPrincipal);
 
+// Arquivos estáticos (CSS, JS, imagens etc.)
+app.use(express.static(path.join(__dirname, 'public')));
+
+// View engine
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// Rotas
+const alunoRoutes = require('./routes/aluno');
+app.use('/', alunoRoutes);
+
 app.listen(process.env.APP_PORT || 3000, () => {
     console.log(`Servidor rodando em http://localhost:${process.env.APP_PORT || 3000}`);
 });
-
-app.use(express.urlencoded({ extended: true })); // Para forms tipo application/x-www-form-urlencoded
-app.use(express.json()); // Para JSON (geralmente APIs)
