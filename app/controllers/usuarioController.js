@@ -11,34 +11,38 @@ const https = require("https");
 const usuarioController = {
   cadastrarAluno: async (req, res) => {
     try {
-      const { nome_usuario, email_usuario, senha_usuario, telefone_usuario } = req.body;
+      const {
+        fullname,
+        emailRegister,
+        passwordRegister,
+        numberRegister
+    } = req.body;
 
-      // Validação simples
-      if (!nome_usuario || !email_usuario || !senha_usuario || !telefone_usuario) {
-        return res.status(400).send("Todos os campos são obrigatórios.");
-      }
-
-      // Criptografar a senha
-      const senhaCriptografada = bcrypt.hashSync(senha_usuario, salt);
-
-      // Montar objeto de dados
-      const novoUsuario = {
-        nome_usuario,
-        email_usuario,
-        senha_usuario: senhaCriptografada,
-        telefone_usuario,
-        tipo: "aluno", // Ou outro valor conforme seu banco
-      };
-
-      // Salvar no banco
-      await usuarioModel.create(novoUsuario);
-
-      res.status(201).send("Aluno cadastrado com sucesso!");
-    } catch (erro) {
-      console.error("Erro ao cadastrar aluno:", erro);
-      res.status(500).send("Erro no servidor ao cadastrar aluno.");
+    if (!fullname || !emailRegister || !passwordRegister || !numberRegister) {
+      return res.status(400).send("Todos os campos são obrigatórios.");
     }
-  },
+
+    const senhaCriptografada = bcrypt.hashSync(passwordRegister, salt);
+
+    const novoUsuario = {
+      nome_usuario: fullname,
+      email_usuario: emailRegister,
+      senha_usuario: senhaCriptografada,
+      telefone_usuario: numberRegister,
+      tipo: "aluno"
+    };
+
+    console.log("✅ Aluno pronto para ser salvo:", novoUsuario);
+
+    // aqui entraremos com o banco (veja abaixo)
+
+    res.status(201).send("Aluno cadastrado com sucesso!");
+  } catch (err) {
+    console.error("Erro ao cadastrar aluno:", err);
+    res.status(500).send("Erro interno no servidor");
+  }
+},
+
 
 
   // Listar todos os usuários
