@@ -35,7 +35,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // Rotas
-const alunoRoutes = require('./routes/aluno');
+const alunoRoutes = require('./app/routes/aluno');
 app.use('/', alunoRoutes);
 
 app.listen(process.env.APP_PORT || 3000, () => {
