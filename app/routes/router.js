@@ -30,18 +30,18 @@ router.get('/produtos', (req, res) => {
 });
 
 // Listar usuários
-router.get("/usuario", usuarioController.listaUsuarios); // Função de listagem
+//router.get("/usuario", usuarioController.listaUsuarios); // Função de listagem
 
 // Exibir perfil do usuário
-router.get("/perfil", usuarioController.mostrarPerfil); // Função para mostrar perfil
+//router.get("/perfil", usuarioController.mostrarPerfil); // Função para mostrar perfil
 
 // Gravar alterações do perfil
-router.post("/perfil", usuarioController.gravarPerfil); // Função para gravar perfil
+//router.post("/perfil", usuarioController.gravarPerfil); // Função para gravar perfil
 
 // Criar novo usuário
-router.post("/criar", usuarioController.criarUsuario); // Supondo que você tenha a função de criar usuário no controller
+//router.post("/criar", usuarioController.criarUsuario); // Supondo que você tenha a função de criar usuário no controller
 
 // Cadastro de aluno (verifique se a função existe em usuarioController)
-router.post('/aluno', usuarioController.cadastrarAluno); // Função para cadastro de aluno
+//router.post('/aluno', usuarioController.cadastrarAluno); // Função para cadastro de aluno
 
 module.exports = router;
