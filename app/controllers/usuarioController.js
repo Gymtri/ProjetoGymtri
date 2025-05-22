@@ -243,6 +243,62 @@ const usuarioController = {
       });
     }
   },
+
+  
+
+}
+
+exports.cadastrarAluno = (req, res) => {
+  const {
+    fullname,
+    emailRegister,
+    passwordRegister,
+    passwordRegisterConfirm,
+    cep,
+    rua,
+    numero,
+    complemento,
+    numberRegister,
+    cpfRegister,
+    plans,
+    numberCardRegister,
+    nameCardRegister,
+    validityDate,
+    cvvValidation
+  } = req.body;
+
+  // Validação básica (exemplo)
+  if (!fullname || !emailRegister || !passwordRegister || passwordRegister !== passwordRegisterConfirm) {
+    return res.render('cadastro', {
+      avisoErro: { cep: 'erro-input' },
+      valores: req.body,
+      mensagem: 'Dados inválidos ou senhas diferentes!'
+    });
+  }
+
+  // Simula salvamento
+  console.log('Novo aluno cadastrado:', req.body);
+
+  // Redireciona ou renderiza sucesso
+  res.redirect('/login');
+}
+
+
+exports.cadastrarAluno = async (req, res) => {
+    const {
+        passwordRegister,
+        passwordRegisterConfirm,
+        // ...
+    } = req.body;
+
+    if (passwordRegister !== passwordRegisterConfirm) {
+        return res.render('cadastro', { mensagem: 'Senhas não coincidem', valores: req.body });
+    }
+
+    const senhaCriptografada = await bcrypt.hash(passwordRegister, 10);
+
+    // Salve no banco a senhaCriptografada em vez da original
 };
+
 
 module.exports = usuarioController;

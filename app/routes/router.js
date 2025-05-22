@@ -29,6 +29,12 @@ router.get('/produtos', (req, res) => {
     res.render('pages/produtos');
 });
 
+exports.cadastrarAluno = (req, res) => {
+    console.log(req.body); // Veja o que está chegando
+
+    res.send('Recebido!');
+};
+
 // Listar usuários
 //router.get("/usuario", usuarioController.listaUsuarios); // Função de listagem
 
@@ -42,6 +48,6 @@ router.get('/produtos', (req, res) => {
 //router.post("/criar", usuarioController.criarUsuario); // Supondo que você tenha a função de criar usuário no controller
 
 // Cadastro de aluno (verifique se a função existe em usuarioController)
-//router.post('/aluno', usuarioController.cadastrarAluno); // Função para cadastro de aluno
+router.post('/aluno',  usuarioController.cadastrarAluno); // Função para cadastro de aluno
 
 module.exports = router;

@@ -29,3 +29,6 @@ app.use("/", rotaPrincipal);
 app.listen(process.env.APP_PORT || 3000, () => {
     console.log(`Servidor rodando em http://localhost:${process.env.APP_PORT || 3000}`);
 });
+
+app.use(express.urlencoded({ extended: true })); // Para forms tipo application/x-www-form-urlencoded
+app.use(express.json()); // Para JSON (geralmente APIs)
